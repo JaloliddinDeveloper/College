@@ -49,12 +49,12 @@ namespace College.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Student student)
+        public async ValueTask<IActionResult> Create(Student student)
         {
-            var students = this.studentService
+            var students = await this.studentService
                 .AddStudentAsync(student);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("details", new { id = student.Id });
         }
         [HttpPost]
         public async ValueTask<IActionResult> Edit(HomeEditViewModel student)
