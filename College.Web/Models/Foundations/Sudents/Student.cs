@@ -10,5 +10,7 @@ namespace College.Web.Models.Foundations.Sudents
         public string Name { get; set; }
         public int Age { get; set; }
         public int Kurs { get; set; }
+        public decimal Balance { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
     }
 }

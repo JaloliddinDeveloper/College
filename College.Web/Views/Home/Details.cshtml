@@ -1,5 +1,8 @@
 ﻿@model Student
 
+@{
+    ViewData["Title"] = "Details Student";
+}
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -20,11 +23,24 @@
                         <div class="col-sm-4 fw-bold">Kurs:</div>
                         <div class="col-sm-8">@Model.Kurs</div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Balance:</div>
+                        <div class="col-sm-8">@Model.Balance</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">CreateDate:</div>
+                        <div class="col-sm-8">@Model.CreateDate.ToString("yyyy-MM-dd")</div>
+                    </div>
+
                 </div>
                 <div class="card-footer text-center">
-                    <a asp-action="Index" class="btn btn-secondary btn-sm">Back to List</a>
-                    <a asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm me-2">Edit</a>
-                    <a asp-controller="Home" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-sm">Delete</a>
+                    <a asp-action="Index" class="btn btn-secondary btn-sm d-inline-block me-2">Back to List</a>
+
+                    <a asp-controller="Home" asp-action="edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm d-inline-block me-2">Edit</a>
+
+                    <form asp-controller="home" asp-action="delete" asp-route-id="@Model.Id" method="post" class="d-inline-block">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
