@@ -1,7 +1,10 @@
+//--------------------------------------------------
+// Copyright (c) Coalition Of Good-Hearted Engineers
+// Free To Use To Find Comfort And Peace
+//--------------------------------------------------
 using College.Web.Models.Foundations.Sudents;
 using College.Web.Models.ViewModels;
 using College.Web.Services.Foundations.Students;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace College.Web.Controllers
@@ -10,9 +13,9 @@ namespace College.Web.Controllers
     {
         private readonly IStudentService studentService;
 
-        public HomeController(IStudentService studentService)=>
+        public HomeController(IStudentService studentService) =>
             this.studentService = studentService;
-        
+
         public ViewResult Index(Student student)
         {
             HomeIndexViewModel viewModel = new HomeIndexViewModel
@@ -21,9 +24,10 @@ namespace College.Web.Controllers
             };
             return View(viewModel);
         }
+
         public async ValueTask<ViewResult> Details(int? id)
         {
-            var student = 
+            var student =
                 await this.studentService
                 .RetrieveStudentByIdAsync(id ?? 1);
 
@@ -31,19 +35,21 @@ namespace College.Web.Controllers
         }
 
         [HttpGet]
-        public ViewResult Create()=>
+        public ViewResult Create() =>
              View();
-        
+
         [HttpGet]
         public async ValueTask<ViewResult> Edit(int id)
         {
-            Student student=await this.studentService.RetrieveStudentByIdAsync (id);
+            Student student = await this.studentService.RetrieveStudentByIdAsync(id);
             HomeEditViewModel editViewModel = new HomeEditViewModel
             {
-                Id=student.Id,
-                Name=student.Name,
-                Age=student.Age,
-                Kurs=student.Kurs,
+                Id = student.Id,
+                Name = student.Name,
+                Age = student.Age,
+                Kurs = student.Kurs,
+                Balance = student.Balance,
+                CreateDate = student.CreateDate,
             };
             return View(editViewModel);
         }
@@ -56,6 +62,7 @@ namespace College.Web.Controllers
 
             return RedirectToAction("details", new { id = student.Id });
         }
+
         [HttpPost]
         public async ValueTask<IActionResult> Edit(HomeEditViewModel student)
         {
@@ -68,9 +75,14 @@ namespace College.Web.Controllers
                 this.studentService.ModifyStudentAsync(existingStudent);
                 return RedirectToAction("index");
             }
-
             return View();
         }
 
+        [HttpPost]
+        public async ValueTask<IActionResult> Delete(int id)
+        {
+           Student student= await this.studentService.RemoveStudentByIdAsync(id);
+            return RedirectToAction("index");
+        }
     }
 }
