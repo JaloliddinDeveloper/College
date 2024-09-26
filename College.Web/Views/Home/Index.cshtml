@@ -15,7 +15,8 @@
                 <th>Kurs</th>
                 <th>Balance</th>
                 <th>CreateDate</th>
-
+                <th>Gender</th>
+                <th>IsMarried</th>
                 <th class="text-center">Actions</th>
             </tr>
         </thead>
@@ -25,9 +26,11 @@
                 <tr>
                     <td>@student.Name</td>
                     <td>@student.Age</td>
-                    <td>@student.Kurs</td>
+                    <td>@student.Cource</td>
                     <td>@student.Balance</td>
                     <td>@student.CreateDate.ToString("yyyy-MM-dd")</td>
+                    <td>@student.Gender</td>
+                    <td>@student.IsMarried</td>
                     <td class="text-center">
                         <a asp-controller="Home" asp-action="Details" asp-route-id="@student.Id" class="btn btn-info btn-sm me-2">Details</a>
                     </td>

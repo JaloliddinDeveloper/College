@@ -21,7 +21,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-4 fw-bold">Kurs:</div>
-                        <div class="col-sm-8">@Model.Kurs</div>
+                        <div class="col-sm-8">@Model.Cource</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-4 fw-bold">Balance:</div>
@@ -31,7 +31,14 @@
                         <div class="col-sm-4 fw-bold">CreateDate:</div>
                         <div class="col-sm-8">@Model.CreateDate.ToString("yyyy-MM-dd")</div>
                     </div>
-
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Gender:</div>
+                        <div class="col-sm-8">@Model.Gender</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">IsMarried:</div>
+                        <div class="col-sm-8">@Model.IsMarried</div>
+                    </div>
                 </div>
                 <div class="card-footer text-center">
                     <a asp-action="Index" class="btn btn-secondary btn-sm d-inline-block me-2">Back to List</a>

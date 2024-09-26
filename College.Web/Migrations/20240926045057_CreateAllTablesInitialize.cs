@@ -19,9 +19,11 @@ namespace College.Web.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
-                    Kurs = table.Column<int>(type: "int", nullable: false),
+                    Cource = table.Column<int>(type: "int", nullable: false),
                     Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CreateDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                    CreateDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    IsMarried = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

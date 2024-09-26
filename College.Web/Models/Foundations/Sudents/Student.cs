@@ -9,8 +9,10 @@ namespace College.Web.Models.Foundations.Sudents
         public int Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
-        public int Kurs { get; set; }
+        public Cource Cource { get; set; }
         public decimal Balance { get; set; }
         public DateTimeOffset CreateDate { get; set; }
+        public GenderType Gender {  get; set; }
+        public bool IsMarried { get; set; }
     }
 }
