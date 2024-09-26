@@ -36,11 +36,17 @@ namespace College.Web.Migrations
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("Cource")
+                        .HasColumnType("int");
+
                     b.Property<DateTimeOffset>("CreateDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("Kurs")
+                    b.Property<int>("Gender")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsMarried")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()

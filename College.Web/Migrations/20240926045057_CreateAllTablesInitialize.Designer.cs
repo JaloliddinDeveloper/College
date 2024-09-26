@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Web.Migrations
 {
     [DbContext(typeof(StorageBroker))]
-    [Migration("20240925183909_CreateAllTablesInitialize")]
+    [Migration("20240926045057_CreateAllTablesInitialize")]
     partial class CreateAllTablesInitialize
     {
         /// <inheritdoc />
@@ -39,11 +39,17 @@ namespace College.Web.Migrations
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("Cource")
+                        .HasColumnType("int");
+
                     b.Property<DateTimeOffset>("CreateDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("Kurs")
+                    b.Property<int>("Gender")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsMarried")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()

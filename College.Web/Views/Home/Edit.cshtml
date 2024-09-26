@@ -22,10 +22,16 @@
                             <input asp-for="Age" class="form-control rounded-pill p-3" placeholder="Enter student age" />
                             <span asp-validation-for="Age" class="text-danger"></span>
                         </div>
-                        <div class="mb-4">
-                            <label asp-for="Kurs" class="form-label">Kurs</label>
-                            <input asp-for="Kurs" class="form-control rounded-pill p-3" placeholder="Enter kurs" />
-                            <span asp-validation-for="Kurs" class="text-danger"></span>
+                        <div class="form-group">
+                            <label asp-for="Cource"></label>
+                            <select asp-for="Cource" class="form-control">
+                                <option value="">Select Cource</option>
+                                @foreach (var cource in Enum.GetValues(typeof(Cource)))
+                                {
+                                    <option value="@cource">@cource</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
                         </div>
                         <div class="mb-4">
                             <label asp-for="Balance" class="form-label">Balance</label>
@@ -36,6 +42,21 @@
                             <label asp-for="CreateDate" class="control-label"></label>
                             <input asp-for="CreateDate" class="form-control" type="date" />
                             <span asp-validation-for="CreateDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Gender" class="form-label">Gender</label><br />
+
+                            <input type="radio" asp-for="Gender" value="Male" id="Male" />
+                            <label for="Male">Male</label>
+
+                            <input type="radio" asp-for="Gender" value="Female" id="Female" class="ms-3" />
+                            <label for="Female">Female</label>
+
+                            <input type="radio" asp-for="Gender" value="Other" id="Other" class="ms-3" />
+                            <label for="Other">Other</label>
+
+                            <span asp-validation-for="Gender" class="text-danger"></span>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-success btn-lg rounded-pill shadow-sm">Save Changes</button>

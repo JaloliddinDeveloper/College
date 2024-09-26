@@ -38,22 +38,6 @@ namespace College.Web.Controllers
         public ViewResult Create() =>
              View();
 
-        [HttpGet]
-        public async ValueTask<ViewResult> Edit(int id)
-        {
-            Student student = await this.studentService.RetrieveStudentByIdAsync(id);
-            HomeEditViewModel editViewModel = new HomeEditViewModel
-            {
-                Id = student.Id,
-                Name = student.Name,
-                Age = student.Age,
-                Kurs = student.Kurs,
-                Balance = student.Balance,
-                CreateDate = student.CreateDate,
-            };
-            return View(editViewModel);
-        }
-
         [HttpPost]
         public async ValueTask<IActionResult> Create(Student student)
         {
@@ -63,6 +47,26 @@ namespace College.Web.Controllers
             return RedirectToAction("details", new { id = student.Id });
         }
 
+        [HttpGet]
+        public async ValueTask<ViewResult> Edit(int id)
+        {
+            Student student = await this.studentService.RetrieveStudentByIdAsync(id);
+            HomeEditViewModel editViewModel = new HomeEditViewModel
+            {
+                Id = student.Id,
+                Name = student.Name,
+                Age = student.Age,
+                Cource = student.Cource,
+                Balance = student.Balance,
+                CreateDate = student.CreateDate,
+                Gender = student.Gender,
+                IsMarried= student.IsMarried,
+            };
+            return View(editViewModel);
+        }
+
+      
+
         [HttpPost]
         public async ValueTask<IActionResult> Edit(HomeEditViewModel student)
         {
@@ -71,7 +75,11 @@ namespace College.Web.Controllers
                 Student existingStudent = await this.studentService.RetrieveStudentByIdAsync(student.Id);
                 existingStudent.Name = student.Name;
                 existingStudent.Age = student.Age;
-                existingStudent.Kurs = student.Kurs;
+                existingStudent.Cource = student.Cource;
+                existingStudent.Balance = student.Balance;
+                existingStudent.CreateDate = student.CreateDate;
+                existingStudent.Gender= student.Gender;
+                existingStudent.IsMarried = student.IsMarried;
                 this.studentService.ModifyStudentAsync(existingStudent);
                 return RedirectToAction("index");
             }
