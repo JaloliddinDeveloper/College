@@ -34,14 +34,14 @@ namespace College.Web.Controllers
         public async ValueTask<ViewResult> Details(int id)
         {
             Student student = await this.studentService.RetrieveStudentByIdAsync(id);
-         
-                HomeDetailsViewModel viewModel = new HomeDetailsViewModel()
-                {
-                    Student = student,
-                    Title = "Student Details"
-                };
 
-                return View(viewModel);
+            HomeDetailsViewModel viewModel = new HomeDetailsViewModel()
+            {
+                Student = student,
+                Title = "Student Details"
+            };
+
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -57,14 +57,14 @@ namespace College.Web.Controllers
 
                 Student newStudent = new Student
                 {
-                   Name= student.Name,
-                   Age= student.Age,
-                   Cource= student.Cource,
-                   Balance= student.Balance,
-                   CreateDate= student.CreateDate,
-                   Gender= student.Gender,
-                   IsMarried= student.IsMarried,
-                   PhotofilePath = uniqueFileName
+                    Name = student.Name,
+                    Age = student.Age,
+                    Cource = student.Cource,
+                    Balance = student.Balance,
+                    CreateDate = student.CreateDate,
+                    Gender = student.Gender,
+                    IsMarried = student.IsMarried,
+                    PhotofilePath = uniqueFileName
                 };
 
                 newStudent = await this.studentService.AddStudentAsync(newStudent);
@@ -87,37 +87,31 @@ namespace College.Web.Controllers
                 Balance = student.Balance,
                 CreateDate = student.CreateDate,
                 Gender = student.Gender,
-                IsMarried= student.IsMarried,
+                IsMarried = student.IsMarried,
             };
             return View(editViewModel);
         }
 
-      
-
         [HttpPost]
         public async ValueTask<IActionResult> Edit(HomeEditViewModel student)
         {
-            if (ModelState.IsValid)
-            {
-                Student existingStudent = await this.studentService.RetrieveStudentByIdAsync(student.Id);
-                existingStudent.Name = student.Name;
-                existingStudent.Age = student.Age;
-                existingStudent.Cource = student.Cource;
-                existingStudent.Balance = student.Balance;
-                existingStudent.CreateDate = student.CreateDate;
-                existingStudent.Gender= student.Gender;
-                existingStudent.IsMarried = student.IsMarried;
-                this.studentService.ModifyStudentAsync(existingStudent);
-                return RedirectToAction("index");
-            }
-            return View();
+            Student existingStudent = await this.studentService.RetrieveStudentByIdAsync(student.Id);
+            existingStudent.Name = student.Name;
+            existingStudent.Age = student.Age;
+            existingStudent.Cource = student.Cource;
+            existingStudent.Balance = student.Balance;
+            existingStudent.CreateDate = student.CreateDate;
+            existingStudent.Gender = student.Gender;
+            existingStudent.IsMarried = student.IsMarried;
+            this.studentService.ModifyStudentAsync(existingStudent);
+            return RedirectToAction("index");
         }
 
         [HttpPost]
         public async ValueTask<IActionResult> Delete(int id)
         {
-           Student student= await this.studentService.RemoveStudentByIdAsync(id);
-            return RedirectToAction("index");
+            Student student = await this.studentService.RemoveStudentByIdAsync(id);
+            return RedirectToAction("Index");
         }
         private string ProcessUploadedFile(HomeCreateViewModel student)
         {

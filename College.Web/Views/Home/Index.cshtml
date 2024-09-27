@@ -1,44 +1,43 @@
 ﻿@model HomeIndexViewModel
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Students List</h2>
+    <h2 class="text-center mb-4">Student Directory</h2>
     <div class="d-flex justify-content-end mb-3">
         <a asp-controller="Home" asp-action="Create" class="btn btn-primary btn-sm">
-            <i class="bi bi-plus-lg me-1"></i> Create New Student
+            <i class="bi bi-plus-lg me-1"></i> Add New Student
         </a>
     </div>
-    <table class="table table-striped table-hover table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Kurs</th>
-                <th>Balance</th>
-                <th>CreateDate</th>
-                <th>Gender</th>
-                <th>IsMarried</th>
-                <th class="text-center">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+
+    <div class="row">
+        <div class="col">
             @foreach (var student in Model.Students)
             {
-                <tr>
-                    <td>@student.Name</td>
-                    <td>@student.Age</td>
-                    <td>@student.Cource</td>
-                    <td>@student.Balance</td>
-                    <td>@student.CreateDate.ToString("yyyy-MM-dd")</td>
-                    <td>@student.Gender</td>
-                    <td>@student.IsMarried</td>
-                    <td class="text-center">
-                        <a asp-controller="Home" asp-action="Details" asp-route-id="@student.Id" class="btn btn-info btn-sm me-2">Details</a>
-                    </td>
-                </tr>
-
+                var photofilePath = Url.Content("~/images/" + (student.PhotofilePath ?? "student.png"));
+                <div class="card mb-4 shadow-sm" style="max-width: 500px; margin: 0 auto; border-radius: 15px; overflow: hidden;">
+                    <div class="d-flex justify-content-center mt-4">
+                        <img src="@photofilePath" alt="@student.Name's Photo" class="img-fluid rounded-circle shadow" style="width: 200px; height: 200px; object-fit: cover;" />
+                    </div>
+                    <div class="card-body p-4 text-center">
+                        <h4 class="card-title mt-3" style="font-weight: 700; font-family: 'Roboto', sans-serif;">@student.Name</h4>
+                        <ul class="list-unstyled mb-4" style="font-size: 1.1rem; font-family: 'Open Sans', sans-serif; text-align: left;">
+                            <li><strong>Age:</strong> @student.Age</li>
+                            <li><strong>Course:</strong> @student.Cource</li>
+                            <li><strong>Balance:</strong> @student.Balance.ToString("C")</li>
+                            <li><strong>Gender:</strong> @student.Gender</li>
+                            <li><strong>Married:</strong> @(student.IsMarried ? "Yes" : "No")</li>
+                        </ul>
+                        <p class="text-muted text-center" style="font-size: 0.85rem;">
+                            <small>Joined on: @student.CreateDate.ToString("yyyy-MM-dd")</small>
+                        </p>
+                    </div>
+                    <div class="card-footer text-center p-3">
+                        <a asp-controller="Home" asp-action="Details" asp-route-id="@student.Id" class="btn btn-outline-info btn-sm me-2">Details</a>
+                        <a asp-controller="Home" asp-action="Edit" asp-route-id="@student.Id" class="btn btn-outline-primary btn-sm">Edit</a>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

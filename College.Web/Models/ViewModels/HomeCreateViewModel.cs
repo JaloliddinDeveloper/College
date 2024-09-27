@@ -2,6 +2,7 @@
 // Copyright (c) Coalition Of Good-Hearted Engineers
 // Free To Use To Find Comfort And Peace
 //--------------------------------------------------
+using College.Web.Attributes;
 using College.Web.Models.Foundations.Sudents;
 using System.ComponentModel.DataAnnotations;
 
@@ -29,7 +30,10 @@ namespace College.Web.Models.ViewModels
         [Required(ErrorMessage = "Please select a gender")]
         public GenderType Gender { get; set; }
 
-        public bool IsMarried { get; set; } 
+        public bool IsMarried { get; set; }
+
+        [MaxFileSize(800)]
+        [AllowedExtensions(new string[] { ".jpg", ".png" })]
         public IFormFile Photo { get; set; }
     }
 }
