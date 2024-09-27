@@ -61,7 +61,7 @@ namespace College.Web.Controllers
                     Age = student.Age,
                     Cource = student.Cource,
                     Balance = student.Balance,
-                    CreateDate = student.CreateDate,
+                    CreateDate =DateTimeOffset.UtcNow,
                     Gender = student.Gender,
                     IsMarried = student.IsMarried,
                     PhotofilePath = uniqueFileName
@@ -85,9 +85,10 @@ namespace College.Web.Controllers
                 Age = student.Age,
                 Cource = student.Cource,
                 Balance = student.Balance,
-                CreateDate = student.CreateDate,
+                CreateDate = DateTimeOffset.UtcNow,
                 Gender = student.Gender,
                 IsMarried = student.IsMarried,
+                ExistingPhotoFilePath = student.PhotofilePath
             };
             return View(editViewModel);
         }
@@ -100,13 +101,21 @@ namespace College.Web.Controllers
             existingStudent.Age = student.Age;
             existingStudent.Cource = student.Cource;
             existingStudent.Balance = student.Balance;
-            existingStudent.CreateDate = student.CreateDate;
+            existingStudent.CreateDate = DateTimeOffset.Now;
             existingStudent.Gender = student.Gender;
             existingStudent.IsMarried = student.IsMarried;
+            if (student.Photo != null)
+            {
+                if (student.ExistingPhotoFilePath != null)
+                {
+                    string filePath = Path.Combine(webHost.WebRootPath, "images", student.ExistingPhotoFilePath);
+                    System.IO.File.Delete(filePath);
+                }
+                existingStudent.PhotofilePath = ProcessUploadedFile(student);
+            }
             this.studentService.ModifyStudentAsync(existingStudent);
-            return RedirectToAction("index");
+            return RedirectToAction("Index");
         }
-
         [HttpPost]
         public async ValueTask<IActionResult> Delete(int id)
         {

@@ -3,81 +3,74 @@
     ViewData["Title"] = "Edit Student";
     var photoFilePath = "~/images/" + (Model.ExistingPhotoFilePath ?? "user.png");
 }
-
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card shadow-lg border-0 rounded-lg">
-                <div class="card-header bg-gradient-info text-white text-center rounded-top">
-                    <h3 class="card-title mb-0">Edit Student</h3>
+            <div class="card shadow border-0 rounded-lg">
+                <div class="card-header" style="background-color: lightsteelblue; border-bottom: 2px solid #4CAF50; border-radius: 10px 10px 0 0;">
+                    <h3 class="card-title mb-0 text-dark text-center" style="font-size: 2.5rem; font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);">
+                        Edit Student
+                    </h3>
                 </div>
                 <div class="card-body">
                     <form enctype="multipart/form-data" asp-controller="Home" asp-action="Edit" method="post" class="p-4">
                         <div class="mb-4">
-                            <label asp-for="Name" class="form-label">Student Name</label>
+                            <label asp-for="Name" class="form-label fw-bold"><i class="bi bi-person-fill"></i> Student Name</label>
                             <input asp-for="Name" class="form-control rounded-pill p-3" placeholder="Enter student name" />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                         <div class="mb-4">
-                            <label asp-for="Age" class="form-label">Age</label>
+                            <label asp-for="Age" class="form-label fw-bold"><i class="bi bi-calendar"></i> Age</label>
                             <input asp-for="Age" class="form-control rounded-pill p-3" placeholder="Enter student age" />
                             <span asp-validation-for="Age" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Cource"></label>
-                            <select asp-for="Cource" class="form-control">
-                                <option value="">Select Cource</option>
+                        <div class="form-group mb-4">
+                            <label asp-for="Cource" class="form-label fw-bold"><i class="bi bi-book"></i> Course</label>
+                            <select asp-for="Cource" class="form-control rounded-pill">
+                                <option value="">Select Course</option>
                                 @foreach (var cource in Enum.GetValues(typeof(Cource)))
                                 {
                                     <option value="@cource">@cource</option>
                                 }
                             </select>
-                            <span asp-validation-for="Gender" class="text-danger"></span>
+                            <span asp-validation-for="Cource" class="text-danger"></span>
                         </div>
                         <div class="mb-4">
-                            <label asp-for="Balance" class="form-label">Balance</label>
+                            <label asp-for="Balance" class="form-label fw-bold"><i class="bi bi-wallet"></i> Balance</label>
                             <input asp-for="Balance" class="form-control rounded-pill p-3" placeholder="Enter Balance" />
                             <span asp-validation-for="Balance" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="CreateDate" class="control-label"></label>
-                            <input asp-for="CreateDate" class="form-control" type="date" />
-                            <span asp-validation-for="CreateDate" class="text-danger"></span>
-                        </div>
-
                         <div class="mb-4">
-                            <label asp-for="Gender" class="form-label">Gender</label><br />
-
-                            <input type="radio" asp-for="Gender" value="Male" id="Male" />
-                            <label for="Male">Male</label>
-
-                            <input type="radio" asp-for="Gender" value="Female" id="Female" class="ms-3" />
-                            <label for="Female">Female</label>
-
-                            <input type="radio" asp-for="Gender" value="Other" id="Other" class="ms-3" />
-                            <label for="Other">Other</label>
-
+                            <label asp-for="Gender" class="form-label fw-bold">Gender</label><br />
+                            <input type="radio" asp-for="Gender" value="Male" id="Male" class="form-check-input" />
+                            <label for="Male" class="form-check-label">Male</label>
+                            <input type="radio" asp-for="Gender" value="Female" id="Female" class="form-check-input ms-3" />
+                            <label for="Female" class="form-check-label">Female</label>
+                            <input type="radio" asp-for="Gender" value="Other" id="Other" class="form-check-input ms-3" />
+                            <label for="Other" class="form-check-label">Other</label>
                             <span asp-validation-for="Gender" class="text-danger"></span>
-                            <div class="form-group row">
-                                <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
-                                <div class="col-sm-10">
-                                    <div class="custom-file">
-                                        <input asp-for="Photo" class="form-control custom-file-input" />
-                                        <label class="custom-file-label">Click here to change photo...</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <img src="@photoFilePath" asp-append-version="true" />
-                            <div asp-validation-summary="All" class="text-danger"></div>
-                            <div class="form-group row">
-                                <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                    <a asp-controller="home" asp-action="index" class="btn btn-primary">Cancel</a>
+                        </div>
+
+                        <div class="form-group row mb-4">
+                            <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <div class="custom-file">
+                                    <input asp-for="Photo" class="form-control custom-file-input" />
+                                    <label class="custom-file-label">Click here to change photo...</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-success btn-lg rounded-pill shadow-sm">Save Changes</button>
+
+                        <div class="text-center mb-4">
+                            <img src="@photoFilePath" asp-append-version="true" style="width: 250px; height: 250px; object-fit: cover;" class="border border-2 rounded" />
+                        </div>
+
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-success ms-2 rounded-pill">Save Changes</button>
+                                <a asp-controller="home" asp-action="index" class="btn btn-secondary ms-2 rounded-pill">Cancel</a>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -88,11 +81,11 @@
 
 @section Scripts {
     <script>
-    $(document).ready(function () {
-        $('.custom-file-input').on("change", function () {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).next('.custom-file-label').html(fileName);
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
         });
-    });
     </script>
 }

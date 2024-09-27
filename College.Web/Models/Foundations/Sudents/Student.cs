@@ -8,7 +8,7 @@ namespace College.Web.Models.Foundations.Sudents
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Age { get; set; }
+        public uint Age { get; set; }
         public Cource Cource { get; set; }
         public decimal Balance { get; set; }
         public DateTimeOffset CreateDate { get; set; }
