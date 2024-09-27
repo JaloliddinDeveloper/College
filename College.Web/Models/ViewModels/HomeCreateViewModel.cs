@@ -15,10 +15,10 @@ namespace College.Web.Models.ViewModels
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
-        [Range(18, 100, ErrorMessage = "Age must be between 18 and 100")]
-        public int Age { get; set; }
+        [Range(18, 100, ErrorMessage = "Age must be between 18 and 110")]
+        public uint Age { get; set; }
 
-        [Required(ErrorMessage = "Kurs is required")]
+        [Required(ErrorMessage = "Cource is required")]
         public Cource Cource { get; set; }
 
         [Range(0, double.MaxValue, ErrorMessage = "Balance must be positive")]
@@ -32,7 +32,7 @@ namespace College.Web.Models.ViewModels
 
         public bool IsMarried { get; set; }
 
-        [MaxFileSize(800)]
+        [MaxFileSize(4000)]
         [AllowedExtensions(new string[] { ".jpg", ".png" })]
         public IFormFile Photo { get; set; }
     }
