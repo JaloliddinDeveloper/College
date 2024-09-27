@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Web.Migrations
 {
     [DbContext(typeof(StorageBroker))]
-    [Migration("20240926045057_CreateAllTablesInitialize")]
-    partial class CreateAllTablesInitialize
+    [Migration("20240927044321_Create-Student-PhotofilePath-prop-added")]
+    partial class CreateStudentPhotofilePathpropadded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,10 @@ namespace College.Web.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhotofilePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -30,6 +30,7 @@ namespace College.Web.Models.ViewModels
         public GenderType Gender { get; set; }
 
         public bool IsMarried { get; set; } 
+        public IFormFile Photo { get; set; }
     }
 }
 

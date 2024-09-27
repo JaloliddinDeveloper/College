@@ -12,9 +12,15 @@ namespace College.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IStudentService studentService;
+        private readonly IWebHostEnvironment webHost;
 
-        public HomeController(IStudentService studentService) =>
+        public HomeController(
+            IStudentService studentService,
+            IWebHostEnvironment webHost)
+        {
             this.studentService = studentService;
+            this.webHost = webHost;
+        }
 
         public ViewResult Index(Student student)
         {
@@ -25,13 +31,17 @@ namespace College.Web.Controllers
             return View(viewModel);
         }
 
-        public async ValueTask<ViewResult> Details(int? id)
+        public async ValueTask<ViewResult> Details(int id)
         {
-            var student =
-                await this.studentService
-                .RetrieveStudentByIdAsync(id ?? 1);
+            Student student = await this.studentService.RetrieveStudentByIdAsync(id);
+         
+                HomeDetailsViewModel viewModel = new HomeDetailsViewModel()
+                {
+                    Student = student,
+                    Title = "Student Details"
+                };
 
-            return View(student);
+                return View(viewModel);
         }
 
         [HttpGet]
@@ -39,12 +49,29 @@ namespace College.Web.Controllers
              View();
 
         [HttpPost]
-        public async ValueTask<IActionResult> Create(Student student)
+        public async ValueTask<IActionResult> Create(HomeCreateViewModel student)
         {
-            var students = await this.studentService
-                .AddStudentAsync(student);
+            if (ModelState.IsValid)
+            {
+                string uniqueFileName = ProcessUploadedFile(student);
 
-            return RedirectToAction("details", new { id = student.Id });
+                Student newStudent = new Student
+                {
+                   Name= student.Name,
+                   Age= student.Age,
+                   Cource= student.Cource,
+                   Balance= student.Balance,
+                   CreateDate= student.CreateDate,
+                   Gender= student.Gender,
+                   IsMarried= student.IsMarried,
+                   PhotofilePath = uniqueFileName
+                };
+
+                newStudent = await this.studentService.AddStudentAsync(newStudent);
+                return RedirectToAction("details", new { id = newStudent.Id });
+            }
+
+            return View();
         }
 
         [HttpGet]
@@ -91,6 +118,21 @@ namespace College.Web.Controllers
         {
            Student student= await this.studentService.RemoveStudentByIdAsync(id);
             return RedirectToAction("index");
+        }
+        private string ProcessUploadedFile(HomeCreateViewModel student)
+        {
+            string uniqueFileName = string.Empty;
+            if (student.Photo != null)
+            {
+                string uploadFolder = Path.Combine(webHost.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + student.Photo.FileName;
+                string imageFilePath = Path.Combine(uploadFolder, uniqueFileName);
+                using (var fileStream = new FileStream(imageFilePath, FileMode.Create))
+                {
+                    student.Photo.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
     }
 }
