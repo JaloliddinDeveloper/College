@@ -14,5 +14,6 @@ namespace College.Web.Models.Foundations.Sudents
         public DateTimeOffset CreateDate { get; set; }
         public GenderType Gender {  get; set; }
         public bool IsMarried { get; set; }
+        public string PhotofilePath { get; set; }
     }
 }

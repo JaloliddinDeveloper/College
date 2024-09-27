@@ -1,7 +1,8 @@
-﻿@model Student
+﻿@model HomeDetailsViewModel
 
 @{
     ViewData["Title"] = "Details Student";
+    var photoFilePath = "~/images/" + (Model.Student.PhotofilePath ?? "student.png");
 }
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -11,41 +12,43 @@
                     <h3 class="card-title">Student Details</h3>
                 </div>
                 <div class="card-body">
+                    <img class="card-img-top" src="@photoFilePath" asp-append-version="true" style="width: 200px; height: auto;" />
+
                     <div class="row mb-3">
                         <div class="col-sm-4 fw-bold">Name:</div>
-                        <div class="col-sm-8">@Model.Name</div>
+                        <div class="col-sm-8">@Model.Student.Name</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-4 fw-bold">Age:</div>
-                        <div class="col-sm-8">@Model.Age</div>
+                        <div class="col-sm-8">@Model.Student.Age</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-4 fw-bold">Kurs:</div>
-                        <div class="col-sm-8">@Model.Cource</div>
+                        <div class="col-sm-8">@Model.Student.Cource</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-4 fw-bold">Balance:</div>
-                        <div class="col-sm-8">@Model.Balance</div>
+                        <div class="col-sm-8">@Model.Student.Balance</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-4 fw-bold">CreateDate:</div>
-                        <div class="col-sm-8">@Model.CreateDate.ToString("yyyy-MM-dd")</div>
+                        <div class="col-sm-8">@Model.Student.CreateDate.ToString("yyyy-MM-dd")</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-4 fw-bold">Gender:</div>
-                        <div class="col-sm-8">@Model.Gender</div>
+                        <div class="col-sm-8">@Model.Student.Gender</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-4 fw-bold">IsMarried:</div>
-                        <div class="col-sm-8">@Model.IsMarried</div>
+                        <div class="col-sm-8">@Model.Student.IsMarried</div>
                     </div>
                 </div>
                 <div class="card-footer text-center">
                     <a asp-action="Index" class="btn btn-secondary btn-sm d-inline-block me-2">Back to List</a>
 
-                    <a asp-controller="Home" asp-action="edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm d-inline-block me-2">Edit</a>
+                    <a asp-controller="Home" asp-action="edit" asp-route-id="@Model.Student.Id" class="btn btn-warning btn-sm d-inline-block me-2">Edit</a>
 
-                    <form asp-controller="home" asp-action="delete" asp-route-id="@Model.Id" method="post" class="d-inline-block">
+                    <form asp-controller="home" asp-action="delete" asp-route-id="@Model.Student.Id" method="post" class="d-inline-block">
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
                     </form>
                 </div>
