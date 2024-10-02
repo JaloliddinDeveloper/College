@@ -2,6 +2,7 @@
 // Copyright (c) Coalition Of Good-Hearted Engineers
 // Free To Use To Find Comfort And Peace
 //--------------------------------------------------
+using College.Web.Brokers.Loggings;
 using College.Web.Brokers.Storages;
 using College.Web.Models.Foundations.Sudents;
 
@@ -10,9 +11,15 @@ namespace College.Web.Services.Foundations.Students
     public class StudentService : IStudentService
     {
         private readonly IStorageBroker storageBroker;
+        private readonly ILoggingBroker loggingBroker;
 
-        public StudentService(IStorageBroker storageBroker) =>
+        public StudentService(
+            IStorageBroker storageBroker,
+            ILoggingBroker loggingBroker)
+        {
             this.storageBroker = storageBroker;
+            this.loggingBroker = loggingBroker;
+        }
 
         public async ValueTask<Student> AddStudentAsync(Student student) =>
             await this.storageBroker.InsertStudentAsync(student);
