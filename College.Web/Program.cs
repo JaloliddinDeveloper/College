@@ -3,6 +3,7 @@
 // Free To Use To Find Comfort And Peace
 //--------------------------------------------------
 using College.Web.Brokers.Storages;
+using College.Web.Services.Foundations.Pictures;
 using College.Web.Services.Foundations.Students;
 
 public class Program
@@ -13,6 +14,8 @@ public class Program
         builder.Services.AddControllersWithViews();
         builder.Services.AddTransient<IStorageBroker, StorageBroker>();
         builder.Services.AddTransient<IStudentService, StudentService>();
+        builder.Services.AddTransient<IPictureService, PictureService>();
+
 
         var app = builder.Build();
 
