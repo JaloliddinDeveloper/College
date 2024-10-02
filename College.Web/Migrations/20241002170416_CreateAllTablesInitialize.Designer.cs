@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Web.Migrations
 {
     [DbContext(typeof(StorageBroker))]
-    [Migration("20240927193655_ChangeToModelTypeInt-Uint")]
-    partial class ChangeToModelTypeIntUint
+    [Migration("20241002170416_CreateAllTablesInitialize")]
+    partial class CreateAllTablesInitialize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,28 @@ namespace College.Web.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("College.Web.Models.Foundations.Pictures.Picture", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Pictures");
+                });
 
             modelBuilder.Entity("College.Web.Models.Foundations.Sudents.Student", b =>
                 {
@@ -55,13 +77,25 @@ namespace College.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhotofilePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("College.Web.Models.Foundations.Pictures.Picture", b =>
+                {
+                    b.HasOne("College.Web.Models.Foundations.Sudents.Student", "Student")
+                        .WithMany("Pictures")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("College.Web.Models.Foundations.Sudents.Student", b =>
+                {
+                    b.Navigation("Pictures");
                 });
 #pragma warning restore 612, 618
         }

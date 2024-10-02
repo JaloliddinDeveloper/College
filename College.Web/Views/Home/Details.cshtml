@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Details Student";
-    var photoFilePath = "~/images/" + (Model.Student.PhotofilePath ?? "student.png");
+   // var photoFilePath = "~/images/" + (Model.Student.PhotofilePath ?? "student.png");
 }
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -12,7 +12,7 @@
                     <h3 class="card-title">Student Details</h3>
                 </div>
                 <div class="card-body">
-                    <img class="card-img-top" src="@photoFilePath" asp-append-version="true" style="width: 200px; height: auto;" />
+                   @*  <img class="card-img-top" src="@photoFilePath" asp-append-version="true" style="width: 200px; height: auto;" /> *@
 
                     <div class="row mb-3">
                         <div class="col-sm-4 fw-bold">Name:</div>
