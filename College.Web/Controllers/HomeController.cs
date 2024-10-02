@@ -64,7 +64,7 @@ namespace College.Web.Controllers
                     CreateDate =DateTimeOffset.UtcNow,
                     Gender = student.Gender,
                     IsMarried = student.IsMarried,
-                    PhotofilePath = uniqueFileName
+                 //   PhotofilePath = uniqueFileName
                 };
 
                 newStudent = await this.studentService.AddStudentAsync(newStudent);
@@ -88,7 +88,7 @@ namespace College.Web.Controllers
                 CreateDate = DateTimeOffset.UtcNow,
                 Gender = student.Gender,
                 IsMarried = student.IsMarried,
-                ExistingPhotoFilePath = student.PhotofilePath
+              //  ExistingPhotoFilePath = student.PhotofilePath
             };
             return View(editViewModel);
         }
@@ -111,7 +111,7 @@ namespace College.Web.Controllers
                     string filePath = Path.Combine(webHost.WebRootPath, "images", student.ExistingPhotoFilePath);
                     System.IO.File.Delete(filePath);
                 }
-                existingStudent.PhotofilePath = ProcessUploadedFile(student);
+               // existingStudent.PhotofilePath = ProcessUploadedFile(student);
             }
             this.studentService.ModifyStudentAsync(existingStudent);
             return RedirectToAction("Index");

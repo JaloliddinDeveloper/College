@@ -12,10 +12,10 @@
         <div class="col">
             @foreach (var student in Model.Students)
             {
-                var photofilePath = Url.Content("~/images/" + (student.PhotofilePath ?? "student.png"));
+               // var photofilePath = Url.Content("~/images/" + (student.PhotofilePath ?? "student.png"));
                 <div class="card mb-4 shadow-sm" style="max-width: 500px; margin: 0 auto; border-radius: 15px; overflow: hidden;">
                     <div class="d-flex justify-content-center mt-4">
-                        <img src="@photofilePath" alt="@student.Name's Photo" class="img-fluid rounded-circle shadow" style="width: 200px; height: 200px; object-fit: cover;" />
+                      @*   <img src="@photofilePath" alt="@student.Name's Photo" class="img-fluid rounded-circle shadow" style="width: 200px; height: 200px; object-fit: cover;" /> *@
                     </div>
                     <div class="card-body p-4 text-center">
                         <h4 class="card-title mt-3" style="font-weight: 700; font-family: 'Roboto', sans-serif;">@student.Name</h4>

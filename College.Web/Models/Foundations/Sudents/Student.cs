@@ -2,6 +2,8 @@
 // Copyright (c) Coalition Of Good-Hearted Engineers
 // Free To Use To Find Comfort And Peace
 //--------------------------------------------------
+using College.Web.Models.Foundations.Pictures;
+
 namespace College.Web.Models.Foundations.Sudents
 {
     public class Student
@@ -14,6 +16,6 @@ namespace College.Web.Models.Foundations.Sudents
         public DateTimeOffset CreateDate { get; set; }
         public GenderType Gender {  get; set; }
         public bool IsMarried { get; set; }
-        public string PhotofilePath { get; set; }
+        public ICollection<Picture> Pictures { get; set; }
     }
 }
