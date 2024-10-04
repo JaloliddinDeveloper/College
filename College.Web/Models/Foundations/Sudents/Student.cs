@@ -3,6 +3,7 @@
 // Free To Use To Find Comfort And Peace
 //--------------------------------------------------
 using College.Web.Models.Foundations.Pictures;
+using System.Collections.Generic;
 
 namespace College.Web.Models.Foundations.Sudents
 {

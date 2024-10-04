@@ -5,6 +5,8 @@
 using College.Web.Brokers.Loggings;
 using College.Web.Brokers.Storages;
 using College.Web.Models.Foundations.Pictures;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace College.Web.Services.Foundations.Pictures
 {
@@ -32,7 +34,6 @@ namespace College.Web.Services.Foundations.Pictures
 
         public async ValueTask<Picture> ModifyPictureAsync(Picture picture) =>
             await this.storageBroker.UpdatePictureAsync(picture);
-
 
         public async ValueTask<Picture> RemovePictureByIdAsync(int pictureId)
         {

@@ -4,6 +4,8 @@
 //--------------------------------------------------
 using College.Web.Models.Foundations.Pictures;
 using College.Web.Models.Foundations.Sudents;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace College.Web.Services.Foundations.Pictures
 {

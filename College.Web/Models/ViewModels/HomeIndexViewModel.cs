@@ -2,8 +2,8 @@
 // Copyright (c) Coalition Of Good-Hearted Engineers
 // Free To Use To Find Comfort And Peace
 //--------------------------------------------------
-using College.Web.Models.Foundations.Pictures;
 using College.Web.Models.Foundations.Sudents;
+using System.Linq;
 
 namespace College.Web.Models.ViewModels
 {
