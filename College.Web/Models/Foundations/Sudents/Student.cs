@@ -10,12 +10,7 @@ namespace College.Web.Models.Foundations.Sudents
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public uint Age { get; set; }
-        public Cource Cource { get; set; }
-        public decimal Balance { get; set; }
-        public DateTimeOffset CreateDate { get; set; }
-        public GenderType Gender {  get; set; }
-        public bool IsMarried { get; set; }
-        public ICollection<Picture> Pictures { get; set; }
+        public int Age { get; set; }
+        public List<Picture> Pictures { get; set; }
     }
 }
