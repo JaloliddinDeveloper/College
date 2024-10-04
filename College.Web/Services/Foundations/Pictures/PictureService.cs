@@ -14,26 +14,25 @@ namespace College.Web.Services.Foundations.Pictures
         private ILoggingBroker loggingBroker;
 
         public PictureService(
-            IStorageBroker storageBroker, 
+            IStorageBroker storageBroker,
             ILoggingBroker loggingBroker)
         {
             this.storageBroker = storageBroker;
             this.loggingBroker = loggingBroker;
         }
 
-        public async ValueTask<Picture> AddPictureAsync(Picture picture)=>
+        public async ValueTask<Picture> AddPictureAsync(Picture picture) =>
             await this.storageBroker.InsertPictureAsync(picture);
-       
-        public IQueryable<Picture> RetrieveAllPictures()=>
-            this.storageBroker.SelectAllPictures();
-       
 
-        public async ValueTask<Picture> RetrievePictureByIdAsync(int pictureId)=>
+        public async ValueTask<IQueryable<Picture>> RetrieveAllPicturesAsync() =>
+            await this.storageBroker.SelectAllPicturesAsync();
+
+        public async ValueTask<Picture> RetrievePictureByIdAsync(int pictureId) =>
             await this.storageBroker.SelectPictureByIdAsync(pictureId);
-        
-        public async ValueTask<Picture> ModifyPictureAsync(Picture picture)=>
+
+        public async ValueTask<Picture> ModifyPictureAsync(Picture picture) =>
             await this.storageBroker.UpdatePictureAsync(picture);
-       
+
 
         public async ValueTask<Picture> RemovePictureByIdAsync(int pictureId)
         {

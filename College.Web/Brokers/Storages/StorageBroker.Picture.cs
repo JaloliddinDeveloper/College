@@ -14,7 +14,7 @@ namespace College.Web.Brokers.Storages
         public async ValueTask<Picture> InsertPictureAsync(Picture picture) =>
            await InsertAsync(picture);
 
-        public IQueryable<Picture> SelectAllPictures() =>
+        public async ValueTask<IQueryable<Picture>> SelectAllPicturesAsync() =>
             SelectAll<Picture>();
 
         public async ValueTask<Picture> SelectPictureByIdAsync(int pictureId) =>

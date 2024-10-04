@@ -2,6 +2,7 @@
 // Copyright (c) Coalition Of Good-Hearted Engineers
 // Free To Use To Find Comfort And Peace
 //--------------------------------------------------
+using College.Web.Models.Foundations.Sudents;
 using Microsoft.EntityFrameworkCore;
 
 namespace College.Web.Brokers.Storages
@@ -13,11 +14,6 @@ namespace College.Web.Brokers.Storages
         {
             this.configuration = configuration;
             Database.Migrate();
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            string connectionString = configuration.GetConnectionString("DefaultConnectionString");
-            optionsBuilder.UseSqlServer(connectionString);
         }
         private async ValueTask<T> InsertAsync<T>(T @object) where T : class
         {
@@ -50,6 +46,23 @@ namespace College.Web.Brokers.Storages
             await broker.SaveChangesAsync();
             return @object;
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            string connectionString = configuration.GetConnectionString("DefaultConnectionString");
+            optionsBuilder.UseSqlServer(connectionString);
+        }
         public override void Dispose() { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Student>()
+                .HasMany(s => s.Pictures)
+                .WithOne(p => p.Student)
+                .HasForeignKey(p => p.StudentId);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+       
     }
 }

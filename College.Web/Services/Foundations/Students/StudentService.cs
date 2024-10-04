@@ -24,8 +24,8 @@ namespace College.Web.Services.Foundations.Students
         public async ValueTask<Student> AddStudentAsync(Student student) =>
             await this.storageBroker.InsertStudentAsync(student);
 
-        public IQueryable<Student> RetrieveAllStudents() =>
-            this.storageBroker.SelectAllStudents();
+        public async ValueTask<IQueryable<Student>> RetrieveAllStudentsAsync() =>
+           await this.storageBroker.SelectAllStudentsAsync();
 
         public async ValueTask<Student> RetrieveStudentByIdAsync(int studentId) =>
             await this.storageBroker.SelectStudentByIdAsync(studentId);

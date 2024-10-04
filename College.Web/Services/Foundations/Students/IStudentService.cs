@@ -9,7 +9,7 @@ namespace College.Web.Services.Foundations.Students
     public interface IStudentService
     {
         ValueTask<Student> AddStudentAsync(Student student);
-        IQueryable<Student> RetrieveAllStudents();
+        ValueTask<IQueryable<Student>> RetrieveAllStudentsAsync();
         ValueTask<Student> RetrieveStudentByIdAsync(int studentId);
         ValueTask<Student> ModifyStudentAsync(Student student);
         ValueTask<Student> RemoveStudentByIdAsync(int studentId);
