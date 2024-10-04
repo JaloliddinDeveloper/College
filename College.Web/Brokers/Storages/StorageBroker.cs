@@ -4,6 +4,9 @@
 //--------------------------------------------------
 using College.Web.Models.Foundations.Sudents;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace College.Web.Brokers.Storages
 {
